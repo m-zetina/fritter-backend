@@ -313,3 +313,82 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
+
+#### `POST /api/channels` - Create a channel
+
+**Body** 
+
+- `name` _{string}_ - The channel name
+- `description` _{string}_ - The channel's description
+
+**Returns**
+
+- A success message
+- An object with the created channel
+
+**Throws**
+
+- `403` if the user is not logged in
+- `409` if the name is already in use
+- `400` if the description is empty or a stream of empty spaces
+
+#### `DELETE /api/channels/:channelId?` - Delete a channel
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the channelId is invalid
+- `403` if the user is not the owner of the channel
+
+#### `PUT /api/channels/:channelId?` - Update a channel's description
+
+**Body** _(no need to add fields that are not being changed)_
+
+- `description` _{string}_ - The updated description content
+
+**Returns**
+
+- A success message
+- An object with the updated channel details
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the channelId is invalid
+- `403` if the user is not the owner of the channel
+- `400` if the description is empty or a stream of empty spaces
+
+#### `POST /api/channels/join` - Join a channel
+
+**Body** 
+
+- `name` _{string}_ - The channel name
+
+**Returns**
+
+- A success message
+- An object with the joined channel
+
+**Throws**
+
+- `403` if the user is not logged in
+- `403` if the user is already in that channel
+
+#### `POST /api/channels/leave` - Leave a channel
+
+**Body** 
+
+- `name` _{string}_ - The channel name
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- `403` if the user is not logged in
+- `403` if the user is not in that channel
