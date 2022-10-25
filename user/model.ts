@@ -17,7 +17,7 @@ export type User = {
 // Mongoose schema definition for interfacing with a MongoDB table
 // Users stored in this table will have these fields, with the
 // type given by the type property, inside MongoDB
-const UserSchema = new Schema({
+export const UserSchema = new Schema({
   // The user's username
   username: {
     type: String,

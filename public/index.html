@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script src="/scripts/freet.js"></script>
   <script src="/scripts/user.js"></script>
+  <script src="/scripts/channel.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
 
@@ -116,6 +117,73 @@
             <input id="id" name="id">
           </div>
           <input type="submit" value="Delete Freet">
+        </form>
+
+        <form id="view-all-channels">
+          <h3>View All Channels</h3>
+          <input type="submit" value="View All Channels">
+        </form>
+
+        <form id="view-channels-by-owner">
+          <h3>View Channels By Owner</h3>
+          <div>
+            <label for="owner">Owner:</label>
+            <input id="owner" name="owner">
+          </div>
+          <input type="submit" value="View Channels By Owner">
+        </form>
+
+        <form id="create-channel">
+          <h3>Create Channel</h3>
+          <div>
+            <label for="name">Name:</label>
+            <textarea id="name" name="name"></textarea>
+          </div>
+          <div>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+          </div>
+          <input type="submit" value="Create Channel">
+        </form>
+
+        <form id="edit-channel">
+          <h3>Edit Channel</h3>
+          <div>
+            <label for="id">ID:</label>
+            <input id="id" name="id">
+          </div>
+          <div>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+          </div>
+          <input type="submit" value="Edit Channel">
+        </form>
+
+        <form id="delete-channel">
+          <h3>Delete Channel</h3>
+          <div>
+            <label for="id">ID:</label>
+            <input id="id" name="id">
+          </div>
+          <input type="submit" value="Delete Channel">
+        </form>
+
+        <form id="join-channel">
+          <h3>Join Channel</h3>
+          <div>
+            <label for="name">Name:</label>
+            <input id="name" name="name">
+          </div>
+          <input type="submit" value="Join Channel">
+        </form>
+
+        <form id="leave-channel">
+          <h3>Leave Channel</h3>
+          <div>
+            <label for="name">Name:</label>
+            <input id="name" name="name">
+          </div>
+          <input type="submit" value="Leave Channel">
         </form>
       </div>
     </section>

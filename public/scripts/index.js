@@ -38,7 +38,14 @@ const formsAndHandlers = {
   'view-freets-by-author': viewFreetsByAuthor,
   'create-freet': createFreet,
   'edit-freet': editFreet,
-  'delete-freet': deleteFreet
+  'delete-freet': deleteFreet,
+  'view-all-channels': viewAllChannels,
+  'view-channels-by-owner': viewChannelsByOwner,
+  'create-channel': createChannel,
+  'edit-channel': editChannel,
+  'delete-channel': deleteChannel,
+  'join-channel': joinChannel,
+  'leave-channel': leaveChannel
 };
 
 // Attach handlers to forms
