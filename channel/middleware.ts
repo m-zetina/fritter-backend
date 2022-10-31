@@ -25,7 +25,6 @@ const isChannelExists = async (req: Request, res: Response, next: NextFunction) 
  * Checks if a channel name in req.body is already in use
  */
 const isChannelNotAlreadyInUse = async (req: Request, res: Response, next: NextFunction) => {
-  // Const validFormat = Types.ObjectId.isValid(req.params.channelId);
   const channel = await ChannelCollection.findOneByName(req.body.name);
 
   if (!channel) {

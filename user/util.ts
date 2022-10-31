@@ -7,6 +7,8 @@ type UserResponse = {
   _id: string;
   username: string;
   dateJoined: string;
+  followers: string[];
+  following: string[];
 };
 
 /**

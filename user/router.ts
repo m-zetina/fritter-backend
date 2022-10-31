@@ -148,4 +148,56 @@ router.delete(
   }
 );
 
+/**
+ * Follow a user account.
+ *
+ * @name POST /api/users/follow
+ *
+ * @param {string} username - username of user to follow
+ * @return {UserResponse} - The updated user
+ * @throws {403} - If there is a user is not logged in
+ * @throws {404} - If requesting to follow a nonexistent user
+ */
+router.post(
+  '/follow',
+  [
+    userValidator.isUserLoggedIn,
+    userValidator.isUserAlreadyFollowing
+  ],
+  async (req: Request, res: Response) => {
+    const user = await UserCollection.findOneByUserId(req.session.userId);
+    const userToFollow = await UserCollection.followUser(req.body.username, user._id);
+    res.status(201).json({
+      message: `You have successfully followed ${userToFollow.username}!`,
+      user: util.constructUserResponse(user)
+    });
+  }
+);
+
+/**
+ * Unfollow a user account.
+ *
+ * @name POST /api/users/unfollow
+ *
+ * @param {string} username - username of user to follow
+ * @return {UserResponse} - The updated user
+ * @throws {403} - If there is a user is not logged in
+ * @throws {404} - If requesting to unfollow a nonexistent user
+ */
+router.post(
+  '/unfollow',
+  [
+    userValidator.isUserLoggedIn,
+    userValidator.isUserFollowing
+  ],
+  async (req: Request, res: Response) => {
+    const user = await UserCollection.findOneByUserId(req.session.userId);
+    const userToUnfollow = await UserCollection.removeFollowing(req.body.username, user._id);
+    res.status(201).json({
+      message: `You have successfully followed ${userToUnfollow.username}!`,
+      user: util.constructUserResponse(user)
+    });
+  }
+);
+
 export {router as userRouter};
