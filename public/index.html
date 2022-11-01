@@ -8,6 +8,7 @@
   <script src="/scripts/freet.js"></script>
   <script src="/scripts/user.js"></script>
   <script src="/scripts/channel.js"></script>
+  <script src="/scripts/feed.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
 
@@ -20,6 +21,8 @@
     <section id="operations-container">
       <h2>Operations:</h2>
       <div class="scrollbox">
+
+        <!-- Users -->
         <form id="create-user">
           <h3>Create User</h3>
           <div>
@@ -75,7 +78,7 @@
         </form>
 
         <form id="follow-user">
-          <h3>Create User</h3>
+          <h3>Follow User</h3>
           <div>
             <label for="username">Username:</label>
             <input id="username" name="username">
@@ -84,13 +87,15 @@
         </form>
 
         <form id="unfollow-user">
-          <h3>Create User</h3>
+          <h3>Unfollow User</h3>
           <div>
             <label for="username">Username:</label>
             <input id="username" name="username">
           </div>
           <input type="submit" value="Unfollow User">
         </form>
+        
+        <!-- Freets -->
 
         <form id="view-all-freets">
             <h3>View All Freets</h3>
@@ -136,6 +141,8 @@
           </div>
           <input type="submit" value="Delete Freet">
         </form>
+
+        <!-- Channels -->
 
         <form id="view-all-channels">
           <h3>View All Channels</h3>
@@ -202,6 +209,25 @@
             <input id="name" name="name">
           </div>
           <input type="submit" value="Leave Channel">
+        </form>
+
+        <!-- Feed -->
+
+        <form id="refresh-feed">
+          <h3>Refresh Feed</h3>
+          <input type="submit" value="Refresh Feed">
+        </form>
+
+        <form id="change-active-filter">
+          <h3>Change Feed Filter</h3>
+          <div>
+            <label for="activeFilter">Filter:</label>
+            <select id="activeFilter" name="activeFilter">
+              <option value="latest">Latest</option>
+              <option value="following">Following</option>
+            </select>
+          </div>
+          <input type="submit" value="Change Active Filter">
         </form>
       </div>
     </section>

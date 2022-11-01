@@ -11,8 +11,7 @@ const isChannelExists = async (req: Request, res: Response, next: NextFunction) 
   if (!channel) {
     res.status(404).json({
       error: {
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        channelNotFound: `Channel with channel name ${req.body.name} does not exist.`
+        channelNotFound: `Channel with channel name ${req.body.name as string} does not exist.`
       }
     });
     return;

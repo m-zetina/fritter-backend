@@ -34,6 +34,8 @@ const formsAndHandlers = {
   'change-password': changePassword,
   'sign-in': signIn,
   'sign-out': signOut,
+  'follow-user': followUser,
+  'unfollow-user': unfollowUser,
   'view-all-freets': viewAllFreets,
   'view-freets-by-author': viewFreetsByAuthor,
   'create-freet': createFreet,
@@ -45,7 +47,9 @@ const formsAndHandlers = {
   'edit-channel': editChannel,
   'delete-channel': deleteChannel,
   'join-channel': joinChannel,
-  'leave-channel': leaveChannel
+  'leave-channel': leaveChannel,
+  'change-active-filter': changeActiveFilter,
+  'refresh-feed': refreshFeed
 };
 
 // Attach handlers to forms
