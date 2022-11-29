@@ -46,7 +46,7 @@ class FeedCollection {
   }
 
   /**
-   * Find a feed by ownerId
+   * Find a feed by its id
    *
    * @param {string} feedId - The id of the feed to find
    * @return {Promise<HydratedDocument<Feed>> | Promise<null> } - The feed with the given feedId, if any
@@ -107,19 +107,16 @@ class FeedCollection {
    * @return {Promise<Array<HydratedDocument<Freet>>>} - The newly updated feed
    */
   private static async getFollowingFreets(ownerId: Types.ObjectId | string): Promise<Array<HydratedDocument<Freet>>> {
-    const feed = await FeedModel.findOne({ownerId});
     const freets = await FreetCollection.findAll();
     const user = await UserCollection.findOneByUserId(ownerId);
     const followingFreets = [];
     for (const freet of freets) {
       if (freet.authorId.toString() in user.following) {
-        followingFreets.push(freet._id.toString());
+        followingFreets.push(freet);
       }
     }
 
-    feed.freets = followingFreets;
-    await feed.save();
-    return feed.populate('freets');
+    return followingFreets;
   }
 }
 
