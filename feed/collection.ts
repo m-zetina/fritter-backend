@@ -22,7 +22,7 @@ class FeedCollection {
   static async addOne(ownerId: Types.ObjectId | string): Promise<HydratedDocument<Feed>> {
     const lastRefresh = new Date();
     const freets = new Array<string>();
-    const filters = ['latest', 'following'];
+    const filters: string[] = [];
     const activeFilter = 'latest';
     const feed = new FeedModel({
       ownerId,
