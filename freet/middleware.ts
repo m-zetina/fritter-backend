@@ -44,6 +44,25 @@ const isValidFreetContent = (req: Request, res: Response, next: NextFunction) =>
 };
 
 /**
+ * Checks if the content of the freet in req.body is valid, i.e a comma seperated string
+ */
+const isValidFreetTags = (req: Request, res: Response, next: NextFunction) => {
+  let {tags} = req.body as {tags: string};
+  tags = tags.trim();
+  if (tags) {
+    const tagsRegex = /^[\w]+(,[\w]+)*$/;
+    if (!tagsRegex.test(tags)) {
+      res.status(400).json({
+        error: 'Freet tags must be a comma separated string.'
+      });
+      return;
+    }
+  }
+
+  next();
+};
+
+/**
  * Checks if the current user is the author of the freet whose freetId is in req.params
  */
 const isValidFreetModifier = async (req: Request, res: Response, next: NextFunction) => {
@@ -62,5 +81,6 @@ const isValidFreetModifier = async (req: Request, res: Response, next: NextFunct
 export {
   isValidFreetContent,
   isFreetExists,
-  isValidFreetModifier
+  isValidFreetModifier,
+  isValidFreetTags
 };

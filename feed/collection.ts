@@ -63,8 +63,18 @@ class FeedCollection {
    */
   static async refreshFeed(ownerId: Types.ObjectId | string): Promise<HydratedDocument<Feed>> {
     const feed = await FeedModel.findOne({ownerId});
-    const freets = feed.activeFilter === 'latest' ? await FreetCollection.findAll() : await this.getFollowingFreets(ownerId);
+    // Const freets = feed.activeFilter === 'latest' ? await FreetCollection.findAll() : await this.getFollowingFreets(ownerId);
+    let freets: Freet[];
+    if (feed.activeFilter === 'latest') {
+      freets = await FreetCollection.findAll();
+    } else if (feed.activeFilter === 'following') {
+      freets = await this.getFollowingFreets(ownerId);
+    } else {
+      freets = await FreetCollection.findAllWithTag(feed.activeFilter);
+    }
+
     if (freets) {
+      feed.freets = [];
       for (const freet of freets) {
         feed.freets.push(freet._id.toString());
       }

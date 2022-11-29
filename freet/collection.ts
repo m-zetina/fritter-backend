@@ -19,13 +19,15 @@ class FreetCollection {
    * @param {string} content - The id of the content of the freet
    * @return {Promise<HydratedDocument<Freet>>} - The newly created freet
    */
-  static async addOne(authorId: Types.ObjectId | string, content: string): Promise<HydratedDocument<Freet>> {
+  static async addOne(authorId: Types.ObjectId | string, content: string, tags?: string): Promise<HydratedDocument<Freet>> {
     const date = new Date();
+    const freetTags = tags ? tags.split(',') : [];
     const freet = new FreetModel({
       authorId,
       dateCreated: date,
       content,
-      dateModified: date
+      dateModified: date,
+      tags: freetTags
     });
     await freet.save(); // Saves freet to MongoDB
     return freet.populate('authorId');
@@ -63,6 +65,24 @@ class FreetCollection {
   }
 
   /**
+   * Get all the freets with a specific tag
+   *
+   * @param {string} tag - The tag of the freets
+   * @return {Promise<HydratedDocument<Freet>[]>} - An array of all of the freets
+   */
+  static async findAllWithTag(tag: string): Promise<Array<HydratedDocument<Freet>>> {
+    const relevantFreets = [];
+    const freets = await this.findAll();
+    for (const freet of freets) {
+      if (freet.tags.includes(tag)) {
+        relevantFreets.push(freet);
+      }
+    }
+
+    return relevantFreets;
+  }
+
+  /**
    * Update a freet with the new content
    *
    * @param {string} freetId - The id of the freet to be updated
@@ -75,6 +95,21 @@ class FreetCollection {
     freet.dateModified = new Date();
     await freet.save();
     return freet.populate('authorId');
+  }
+
+  /**
+   * Update a freet with the new tags
+   *
+   * @param {string} freetId - The id of the freet to be updated
+   * @param {Array<string>} tags - The new tags of the freet
+   * @return {Promise<HydratedDocument<Freet>>} - The newly updated freet
+   */
+  static async updateTags(freetId: Types.ObjectId | string, tags: string[]): Promise<HydratedDocument<Freet>> {
+    const freet = await FreetModel.findOne({_id: freetId});
+    freet.tags = tags;
+    freet.dateModified = new Date();
+    await freet.save();
+    return freet.populate('tags');
   }
 
   /**
